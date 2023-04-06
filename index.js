@@ -267,20 +267,6 @@ router.get('/api/count', async ctx => {
   };
 });
 
-router.post('/message/post', async ctx => {
-  const { ToUserName, FromUserName, Content, CreateTime } = ctx.request.body;
-
-  const response = await getAIResponse(Content);
-  
-  ctx.body = {
-    ToUserName: FromUserName,
-    FromUserName: ToUserName,
-    CreateTime: +new Date(),
-    MsgType: 'text',
-    
-    Content: response,
-  };
-});
 
 // 小程序调用，获取微信 Open ID
 router.get('/api/wx_openid', async ctx => {
