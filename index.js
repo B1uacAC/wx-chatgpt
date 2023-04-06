@@ -270,12 +270,15 @@ router.get('/api/count', async ctx => {
 router.post('/message/post', async ctx => {
   const { ToUserName, FromUserName, Content, CreateTime } = ctx.request.body;
 
+  const response = await getAIResponse(Content);
+  
   ctx.body = {
     ToUserName: FromUserName,
     FromUserName: ToUserName,
     CreateTime: +new Date(),
     MsgType: 'text',
-    Content: `反弹你发的消息：${Content}`,
+    
+    Content: response,
   };
 });
 
