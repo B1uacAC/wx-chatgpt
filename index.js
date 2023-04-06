@@ -267,6 +267,18 @@ router.get('/api/count', async ctx => {
   };
 });
 
+router.post('/message/post', async ctx => {
+  const { ToUserName, FromUserName, Content, CreateTime } = ctx.request.body;
+
+  ctx.body = {
+    ToUserName: FromUserName,
+    FromUserName: ToUserName,
+    CreateTime: +new Date(),
+    MsgType: 'text',
+    Content: `反弹你发的消息：${Content}`,
+  };
+});
+
 // 小程序调用，获取微信 Open ID
 router.get('/api/wx_openid', async ctx => {
   if (ctx.request.headers['x-wx-source']) {
